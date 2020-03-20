@@ -20,15 +20,19 @@ Web服务器以静态HTML网页的形式将HTTP response返回到您的浏览器
 最终，Web浏览器处理HTTP response中动态产生的HTML网页，就好像在处理静态网页一样。
 
 #### JSP示例
-```JSP
+
+```jsp
+<!--
+  <%--这是JSP注释--%>
+ -->
 <html>
 <head>
 <title>Hello World</title>
 </head>
 <body>
 Hello World!<br/>
-<% 
-out.println("Your IP address is " + request.getRemoteAddr()); 
+<%
+out.println("Your IP address is " + request.getRemoteAddr());
 %>
 </body>
 </html>
