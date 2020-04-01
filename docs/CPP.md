@@ -141,6 +141,141 @@ Total value is :300
 Total value is :120
 ```
 
+### C++中的数学
+
+#### 数学运算
+
+在 C++ 中，除了可以创建各种函数，还包含了各种有用的函数供您使用。这些函数写在标准 C 和 C++ 库中，叫做内置函数。
+
+使用内置函数需引用数学头文件 `<cmath>`。
+
+
+|序号   |	函数 |  描述    |
+|:--:   | :--:  |   :--:   |
+|1      |	double cos(double)  |  该函数返回弧度角（double 型）的余弦。|
+|2	    |double sin(double)     |   该函数返回弧度角（double 型）的正弦。|
+|3      |	double tan(double) |    该函数返回弧度角（double 型）的正切。|
+|4      |	double log(double) |    该函数返回参数的自然对数。|
+|5      |	double pow(double, double) |    假设第一个参数为 x，第二个参数为 y，则该函|数返回 x 的 y 次方。|
+|6      |	double hypot(double, double) |  该函数返回两个参数的平方总和的平方根，也就是说，参数为一个直角三角形的两个直角边，函数会返回斜边的长度。|
+|7      |	double sqrt(double) |   该函数返回参数的平方根。|
+|8      |	int abs(int) |  该函数返回整数的绝对值。|
+|9	    |double fabs(double) |  函数返回任意一个十进制数的绝对值。|
+|10	    |double floor(double) | 该函数返回一个小于或等于传入参数的最大整数。|
+
+
+#### 随机数
+
+关于随机数生成器，有两个相关的函数。一个是 rand()，该函数只返回一个伪随机数。生成随机数之前必须先调用 srand() 函数。
+
+```C++
+#include <iostream>
+#include <ctime>
+#include <cstdlib>
+
+using namespace std;
+ 
+int main ()
+{
+   int i,j;
+ 
+   // 设置种子
+   srand( (unsigned)time( NULL ) );
+
+   /* 生成 10 个随机数 */
+   for( i = 0; i < 10; i++ )
+   {
+      // 生成实际的随机数
+      j= rand();
+      cout <<"随机数： " << j << endl;
+   }
+
+   return 0;
+} 
+```
+
+### C++字符串
+
+#### 使用字符串函数操作
+
+|序号|	函数 | 目的|
+|:--:|:--:|:--:|
+|1|	strcpy(s1, s2) |复制字符串 s2 到字符串 s1。|
+|2	|strcat(s1, s2) |连接字符串 s2 到字符串 s1 的末尾。|
+|3|	strlen(s1) |返回字符串 s1 的长度。|
+|4|	strcmp(s1, s2) |如果 s1 和 s2 是相同的，则返回 0；如果 s1<s2 则返回小于 0；如果 s1>s2 则返回大于 0。|
+|5|	strchr(s1, ch) |返回一个指针，指向字符串 s1 中字符 ch 的第一次出现的位置。|
+|6	|strstr(s1, s2) |返回一个指针，指向字符串 s1 中字符串 s2 的第一次出现的位置。|
+
+#### String类
+
+`string 类` 类型，支持上述所有的操作，另外还增加了其他更多的功能。
+
+```c++
+#include <iostream>
+#include <string>
+
+using namespace std;
+
+int main ()
+{
+   string str1 = "Hello";
+   string str2 = "World";
+   string str3;
+   int  len ;
+
+   // 复制 str1 到 str3
+   str3 = str1;
+   cout << "str3 : " << str3 << endl;
+
+   // 连接 str1 和 str2
+   str3 = str1 + str2;
+   cout << "str1 + str2 : " << str3 << endl;
+
+   // 连接后，str3 的总长度
+   len = str3.size();
+   cout << "str3.size() :  " << len << endl;
+
+   return 0;
+} 
+```
+
+### C++引用
+
+引用变量是一个别名，也就是说，它是某个已存在变量的另一个名字。一旦把引用初始化为某个变量，就可以使用该引用名称或变量名称来指向变量。使用 `&` 来引用。例如：
+
+```c++
+int i=1;
+int& j=i;   // 即j的值就是i的值。
+```
+
+引用的实质是指针，旨在大部分情况下代替指针，
+
+功能性：可以满足指针的多数需要使用指针的场合，
+
+安全性：可以避开由于指针操作不当带来的内存错误
+
+操作性：简单易用，又不失强大
+
+
+### C++基本的输入输出
+
+I/O库头文件
+
+|头文件|函数&描述|
+|:--:|--|
+|\<iostream\>	|该文件定义了 cin、cout、cerr 和 clog 对象，分别对应于标准输入流、标准输出流、非缓冲标准错误流和缓冲标准错误流。|
+|\<iomanip\>	|该文件通过所谓的参数化的流操纵器（比如 setw 和 setprecision），来声明对执行标准化 I/O 有用的服务。|
+|\<fstream\>	|该文件为用户控制的文件处理声明服务。我们将在文件和流的相关章节讨论它的细节。|
+
+|\<iostream\>常见流|一般搭配|
+|--|--|
+|标准输出流（cout）|流插入运算符 << |
+|标准输入流（cin）|流提取运算符 >> |
+|标准错误流（cerr）|流插入运算符 <<|
+|标准日志流（clog）|流插入运算符 <<|
+
+
 ### 面向对象
 
 类的格式定义
@@ -148,7 +283,7 @@ Total value is :120
 ```c++
 class 类名
 {
-    private:     //默认没有说明public、protected为private私有的。
+    private:     //默认没有说明public、protected的为private私有的。
         成员数据;// int age; 
         成员函数;// int getAge(){}
                  //私有部分外部使用时需要通过public公有函数来访问。
