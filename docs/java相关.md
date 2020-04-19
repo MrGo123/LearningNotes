@@ -37,3 +37,50 @@ out.println("Your IP address is " + request.getRemoteAddr());
 </body>
 </html>
 ```
+
+
+### 单元测试Junit
+
+**黑盒白盒**
+
+“盒”：介于输入与输出之间。运行时“盒”可视为白盒，不可视为黑盒。（即看不看得见流程）。
+
+**测试（建议）**
+
+1. 定义测试类
+* 包名定义为：XXX.XXX.test   eg：com.zy68.test
+* 类名为XXXTest    eg：CalculatorTest
+
+2. 定义测试方法
+* 方法命名：testXXX    eg：testAdd()
+* 返回值：void
+* 参数列表：空参
+
+3. 给方法加注解 \@Test
+4. 导入Junit依赖环境
+
+5. 处理结果：可以用断言
+
+```java
+Assert.assertEquals(期望的结果,将要判断的结果);
+Assert.assertEquals(3,testAdd(1+2));
+/*断言正确：无返回结果；
+*/
+```
+6. 补充的注解
+
+\@Before 
+在所有的方法实现前都先实现有\@Before注解修饰的方法
+
+\@After
+（与\@before对应）在所有的方法都实现后才实现\@After注解修饰的方法。
+
+### 反射
+
+框架设计的灵魂（即主要用于设计框架）
+
+反射：将类的各个组成部分封装为其他对象，即反射机制。
+
+好处：
+* 可在程序运行中操作对象，如在编码时：System.out.…… 每一个点之后显示的就是对象，即整个IDE在运行中，可以操作对象来使用
+* 可以解耦，提高程序可扩展性。
