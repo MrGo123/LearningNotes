@@ -43,9 +43,10 @@ out.println("Your IP address is " + request.getRemoteAddr());
 
 **黑盒白盒**
 
-“盒”：介于输入与输出之间。运行时“盒”可视为白盒，不可视为黑盒。（即看不看得见流程）。
+“盒”：介于输入与输出之间。
+运行时“盒”可视为白盒，不可视为黑盒。（即看不看得见过程）。
 
-**测试（建议）**
+**单元测试（建议）**
 
 1. 定义测试类
 * 包名定义为：XXX.XXX.test   eg：com.zy68.test
@@ -56,24 +57,31 @@ out.println("Your IP address is " + request.getRemoteAddr());
 * 返回值：void
 * 参数列表：空参
 
-3. 给方法加注解 \@Test
+3. 给方法加测试注解 \@Test
 4. 导入Junit依赖环境
 
 5. 处理结果：可以用断言
 
 ```java
 Assert.assertEquals(期望的结果,将要判断的结果);
-Assert.assertEquals(3,testAdd(1+2));
+Assert.assertEquals(3,testAdd(2+2));
 /*断言正确：无返回结果；
+*/
+/*断言错误：
+java.lang.AssertionError:
+预期:3
+实际:4
 */
 ```
 6. 补充的注解
 
 \@Before 
-在所有的方法实现前都先实现有\@Before注解修饰的方法
+在所有的测试方法实现前都先实现有\@Before注解修饰的方法
 
 \@After
 （与\@before对应）在所有的方法都实现后才实现\@After注解修饰的方法。
+> 这用了这两个注解的的方法，不论是否手动运行，它都会自动运行
+
 
 ### 反射
 
@@ -84,3 +92,17 @@ Assert.assertEquals(3,testAdd(1+2));
 好处：
 * 可在程序运行中操作对象，如在编码时：System.out.…… 每一个点之后显示的就是对象，即整个IDE在运行中，可以操作对象来使用
 * 可以解耦，提高程序可扩展性。
+
+
+
+### Servlet----[Oracle docs](https://docs.oracle.com/javaee/7/api/)
+
+Servlet(server applet)：运行在服务器上的小程序
+> Servlet就是一个**接口**，定义了Java类被浏览器访问到tomcat识别的规则。
+
+执行原理
+1. 当服务器接收到客户端浏览器的请求后，会解析请求URL路径，获取访问的servlet的资源路径；
+2. 查找web.xml文件，是否有对应的<url-pattern>标签体内容；
+3. 如果有，则再找到对应的<servlet-class>全类名；
+4. Tomcat会将字节码文件加载进内存，并且创建其对象；
+5. 调用其方法
