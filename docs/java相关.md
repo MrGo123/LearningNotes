@@ -118,6 +118,8 @@ java.lang.AssertionError:
 
 ### Tomcat
 
+Tomcat简单的说就是一个运行JAVA的网络服务器，底层是Socket的一个程序，它也是JSP和Serlvet的一个容器。
+
 #### 一、Tomcat三个功能：
 1. Web服务器
 2. jsp容器
