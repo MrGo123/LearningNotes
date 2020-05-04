@@ -401,3 +401,126 @@ void main()
 符号优先级：**重载后的符号的优先级不变**。
 友元重载函数：对于双目运算符，有两个形参；单目运算符有一个形参。
 “=,(),[],->”等不能重载为友元函数。
+
+
+### 转换函数
+
+将类变成数据类型进行输出。
+
+类名 :: operator 数据类型{
+   ……
+   return ~;
+}
+
+## 高级篇
+
+### 动态内存
+
+* 栈：在函数内部声明的所有变量都将占用栈内存。
+* 堆：这是程序中未使用的内存，在程序运行时可用于动态分配内存。
+
+#### new 和 delete
+
+**new**
+使用特殊的运算符 new 为给定类型的变量在运行时分配堆内的内存，这会**返回所分配的空间地址**。
+
+> new 与 malloc()函数的区别在于，new不仅分配了内存，还创建了**对象**。
+
+**delete**
+
+当某个已经动态分配内存的变量不再需要使用时，可以使用 delete 操作符释放它所占用的内存。
+
+#### 数组的动态内存分配
+
+一维
+```c++
+char* hello=new char[10];
+delete [] hello;
+```
+
+多维
+```c++
+// 分配内存
+for(int i = 0; i < 5; i++) {
+    hello[i] = new char[3];
+}
+// 释放内存
+for(int i = 0; i < 5; i++) {
+    delete[] hello[i];
+}
+delete [] hello; 
+```
+
+### C++命名空间
+
+命名空间，解决来自不同文件的相同名称问题，可作为附加信息来区分不同库中相同名称的函数、类、变量等。使用了命名空间即定义了上下文。本质上，命名空间就是定义了一个范围，对象的范围。
+
+例如 `using namespace std;`
+```c++
+
+// 未声明命名空间
+// 使用标准输入输出
+std::cout<<~;
+std::cin>>~;
+
+// 声明了命名空间
+using namespace std;
+// 使用标准输入输出时可直接使用
+cout<<~;
+cin>>~;
+
+```
+
+定义命名空间
+```c++
+namespace 空间名 {
+   // 代码声明
+}
+// 调用时
+空间名::value;       //value可以使变量或函数
+```
+
+```c++
+#include <iostream>
+using namespace std;
+
+// 第一个命名空间
+namespace first_space{
+   void func(){
+      cout << "Inside first_space" << endl;
+   }
+}
+// 第二个命名空间
+namespace second_space{
+   void func(){
+      cout << "Inside second_space" << endl;
+   }
+}
+using namespace first_space;  //声明使用的命名空间
+int main ()
+{
+ 
+   // 调用第一个命名空间中的函数
+   func();
+   // 调用第二个命名空间中的函数
+   first_space::func();
+   return 0;
+}
+```
+
+> using 指令也可以用来指定命名空间中的特定项目
+> eg:`using std::cout;`  则其他如 `endl` 需使用`std::endl;`形式
+
+嵌套命名空间
+```c++
+namespace namespace_name1 {
+   // 代码声明
+   namespace namespace_name2 {
+      // 代码声明
+   }
+}
+// 直接使用时，如使用命名空间2中的 a 变量
+namespace_name1::namespace_name2::a;
+// 先声明再用
+using namespace namespace_name1::namespace_name2;
+```
